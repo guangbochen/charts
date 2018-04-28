@@ -170,9 +170,9 @@ questions:
   show_subquestion_if: true
   subquestions:
   - variable: ingress.hosts[0].name
-    default: "wordpress.local"
+    default: ""
     description: "Hostname to your WordPress installation"
-    type: string
+    type: hostname
     required: true
     label: Hostname
   - variable: ingress.hosts[0].path
@@ -180,4 +180,4 @@ questions:
     description: "Path within the url structure"
     type: string
     required: true
-    label: Hostname
+    label: Host Path
