@@ -9,11 +9,6 @@ questions:
   type: boolean
   show_subquestion_if: false
   subquestions:
-  - variable: image.registry
-    default: "docker.io"
-    description: "Docker image registry"
-    type: string
-    label: Redis Image Registry
   - variable: image.repository
     default: "bitnami/redis"
     description: "Docker image name"
