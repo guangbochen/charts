@@ -176,7 +176,7 @@ questions:
     required: true
     label: Hostname
   - variable: ingress.hosts[0].path
-    default: "/"
+    default: ""
     description: "Path within the url structure"
     type: string
     required: true
