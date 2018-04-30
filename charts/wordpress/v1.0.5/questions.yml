@@ -140,6 +140,7 @@ questions:
   default: "NodePort"
   description: "WordPress Service type"
   type: enum
+  show_if: "ingress.enabled=false"
   options:
     - "ClusterIP"
     - "NodePort"
@@ -163,7 +164,7 @@ questions:
   label: NodePort Https Port
   show_if: "serviceType=NodePort"
 - variable: ingress.enabled
-  default: "false"
+  default: "true"
   description: "Enable ingress controller resource"
   type: boolean
   label: Enable External Access
