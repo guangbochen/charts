@@ -137,36 +137,37 @@ questions:
     type: storageclass
     label: Default StorageClass for WordPress
 - variable: serviceType
-  default: "NodePort"
+  default: "ClusterIP"
   description: "WordPress Service type"
   type: enum
+  show_if: "ingress.enabled=false"
   options:
     - "ClusterIP"
     - "NodePort"
     - "LoadBalancer"
   required: true
   label: WordPress Service Type
-- variable: nodePorts.http
-  default: ""
-  description: "NodePort http port(to set explicitly, choose port between 30000-32767)"
-  type: int
-  min: 30000
-  max: 32767
-  label: NodePort Http Port
-  show_if: "serviceType=NodePort"
-- variable: nodePorts.https
-  default: ""
-  description: "NodePort https port(to set explicitly, choose port between 30000-32767)"
-  type: int
-  min: 30000
-  max: 32767
-  label: NodePort Https Port
-  show_if: "serviceType=NodePort"
+  show_subquestion_if: "NodePort"
+  subquestions:
+  - variable: nodePorts.http
+    default: ""
+    description: "NodePort http port(to set explicitly, choose port between 30000-32767)"
+    type: int
+    min: 30000
+    max: 32767
+    label: NodePort Http Port
+  - variable: nodePorts.https
+    default: ""
+    description: "NodePort https port(to set explicitly, choose port between 30000-32767)"
+    type: int
+    min: 30000
+    max: 32767
+    label: NodePort Https Port
 - variable: ingress.enabled
-  default: "false"
+  default: "true"
   description: "Enable ingress controller resource"
   type: boolean
-  label: Enable External Access
+  label: Expose app using Layer 7 Load Balancer
   show_subquestion_if: true
   subquestions:
   - variable: ingress.hosts[0].name
@@ -175,9 +176,3 @@ questions:
     type: hostname
     required: true
     label: Hostname
-  - variable: ingress.hosts[0].path
-    default: "/"
-    description: "Path within the url structure"
-    type: string
-    required: true
-    label: Host Path
