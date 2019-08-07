@@ -1,6 +1,6 @@
-{{- if .Values.deployments.restoreOperator }}
-apiVersion: "etcd.database.coreos.com/v1beta2"
-kind: "EtcdRestore"
+{{- if .Values.customResources.createRestoreCRD }}
+apiVersion: etcd.database.coreos.com/v1beta2
+kind: EtcdRestore
 metadata:
   # An EtcdCluster with the same name will be created
   name: {{ .Values.etcdCluster.name }}

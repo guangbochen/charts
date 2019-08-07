@@ -1,8 +1,8 @@
-{{- if .Values.deployments.etcdOperator }}
+{{- if .Values.customResources.createEtcdClusterCRD }}
 apiVersion: etcd.database.coreos.com/v1beta2
 kind: EtcdCluster
 metadata:
-  name: "{{ .Values.etcdCluster.name }}"
+  name: {{ .Values.etcdCluster.name }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: {{ template "etcd-operator.name" . }}
