@@ -8,6 +8,11 @@ metadata:
     chart: {{ template "cert-manager.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+  {{- if .Release.IsUpgrade }}
+  annotations:
+    "helm.sh/hook": "post-install"
+    "helm.sh/hook-weight": "5"
+  {{- end }}
 spec:
   acme:
     {{- if eq .Values.ingressShim.defaultIssuerName "letsencrypt-prod" }}
