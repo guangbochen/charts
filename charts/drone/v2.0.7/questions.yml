@@ -1,5 +1,6 @@
 labels:
   io.cattle.role: cluster # options are cluster/project
+rancher_min_version: 2.3.0
 categories:
 - CI/CD
 questions:
@@ -47,27 +48,12 @@ questions:
   description: "Set drone server host e.g drone.domain.io, if not set, it will be autofilled with the cluster host."
   label: Drone Host Doamin
   group: "Drone Settings"
-- variable: sourceControl.secret
-  default: ""
-  type: secret
-  description: "Name of an existing secret to get the drone provider secret values from."
-  label: Select the Existing Drone Provider Secret
-  group: "Drone Settings"
 - variable: server.adminUser
   default: ""
   type: string
   description: "Set to a valid oauth user from your git/oauth server."
   label: Set Drone Admin User
   group: "Drone Settings"
-- variable: env.DRONE_LOGS_DEBUG
-  default: "false"
-  type: enum
-  description: "The default log level is INFO. You can enable more detailed debug logging with the following configuration parameter."
-  label: Enable Drone Debugging Logs
-  group: "Drone Settings"
-  options:
-  - "false"
-  - "true"
 - variable: sourceControl.provider
   default: "github"
   description: "Choose your server integrations"
@@ -82,6 +68,12 @@ questions:
   - "gogs"
   - "bitbucketCloud"
   - "bitbucketServer"
+- variable: sourceControl.secret
+  default: ""
+  type: secret
+  description: "Name of an existing secret to get the drone provider secret values from."
+  label: Select the Existing Drone Provider Secret
+  group: "Drone Settings"
 # Github config
 - variable: sourceControl.github.clientID
   default: ""
@@ -201,6 +193,36 @@ questions:
     description: "If not empty, uses the specified existing PVC instead of creating new one"
     type: pvc
     label: Uses Existing Persistent Volume Cliam
+- variable: env.DRONE_LOGS_DEBUG
+  default: "false"
+  type: enum
+  description: "The default log level is INFO. You can enable more detailed debug logging with the following configuration parameter."
+  label: Enable Drone Debugging Logs
+  group: "Drone Settings"
+  options:
+  - "false"
+  - "true"
+# database setting
+- variable: server.env.DRONE_DATABASE_DRIVER
+  default: "sqlite3"
+  description: "Drone requires the use of a database backend for persistence. Drone uses an embedded sqlite database by default"
+  type: enum
+  required: true
+  label: Select Drone Databse Driver
+  group: "Database Settings"
+  options:
+  - "sqlite3"
+  - "postgres"
+  - "mysql"
+- variable: server.env.DRONE_DATABASE_DATASOURCE
+  default: ""
+  description: "Specify Drone database datasource, e.g., postgres://root:password@1.2.3.4:5432/postgres?sslmode=disable"
+  type: string
+  required: true
+  label: Drone Database Datasource
+  show_if: "server.env.DRONE_DATABASE_DRIVER!=sqlite3"
+  group: "Database Settings"
+# service & LB settings
 - variable: ingress.enabled
   default: false
   description: "Expose app using Layer 7 Load Balancer - ingress"
@@ -242,23 +264,3 @@ questions:
   type: boolean
   label: Enable Prometheus Metrics Endpoint
   group: "Metrics Setting"
-# database setting
-- variable: server.env.DRONE_DATABASE_DRIVER
-  default: "sqlite3"
-  description: "Drone requires the use of a database backend for persistence. Drone uses an embedded sqlite database by default"
-  type: enum
-  required: true
-  label: Select Drone Databse Driver
-  group: "Database Settings"
-  options:
-    - "sqlite3"
-    - "postgres"
-    - "mysql"
-- variable: server.env.DRONE_DATABASE_DATASOURCE
-  default: ""
-  description: "Specify Drone database datasource, e.g., postgres://root:password@1.2.3.4:5432/postgres?sslmode=disable"
-  type: string
-  required: true
-  label: Drone Database Datasource
-  show_if: "server.env.DRONE_DATABASE_DRIVER!=sqlite3"
-  group: "Database Settings"
