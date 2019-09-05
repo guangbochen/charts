@@ -257,7 +257,7 @@ questions:
 - variable: server.env.DRONE_DATABASE_DATASOURCE
   default: ""
   description: "Specify Drone database datasource, e.g., postgres://root:password@1.2.3.4:5432/postgres?sslmode=disable"
-  type: enum
+  type: string
   required: true
   label: Drone Database Datasource
   show_if: "server.env.DRONE_DATABASE_DRIVER!=sqlite3"
