@@ -193,11 +193,11 @@ questions:
     description: "If not empty, uses the specified existing PVC instead of creating new one"
     type: pvc
     label: Uses Existing Persistent Volume Cliam
-- variable: env.DRONE_LOGS_DEBUG
+- variable: server.env.DRONE_LOGS_DEBUG
   default: "false"
   type: enum
   description: "The default log level is INFO. You can enable more detailed debug logging with the following configuration parameter."
-  label: Enable Drone Debugging Logs
+  label: Enable Drone Server Debugging Logs
   group: "Drone Settings"
   options:
   - "false"
