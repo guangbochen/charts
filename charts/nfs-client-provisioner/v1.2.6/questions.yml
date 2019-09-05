@@ -1,0 +1,87 @@
+categories:
+- storage
+labels:
+  io.cattle.role: cluster # options are cluster/project
+questions:
+- variable: defaultImage
+  default: true
+  description: "Use default Docker image"
+  label: Use Default Image
+  type: boolean
+  group: "Container Images"
+  show_subquestion_if: false
+  subquestions:
+  - variable: image.repository
+    default: "ranchercharts/external_storage-nfs-client-provisioner"
+    description: "NFS Cleint Docker image name"
+    type: string
+    label: NFS Client Image Name
+  - variable: image.tag
+    default: "v3.1.0-k8s1.11"
+    description: "NFS client image tag"
+    type: string
+    label: NFS Client Image Tag
+- variable: replicaCount
+  default: 1
+  description: "Number of provisioner instances to deployed."
+  type: int
+  label: Replicas
+  required: true
+  min: 1
+  group: "NFS Server"
+- variable: nfs.server
+  default: ""
+  description: "Hostname of the NFS server(ip or hostname)."
+  type: string
+  label: NFS Server Address
+  required: true
+  group: "NFS Server"
+- variable: nfs.path
+  default: "/ifs/kubernetes"
+  description: "BasePath of the mount point to be used."
+  type: string
+  label: NFS Mount BasePath
+  required: true
+  group: "NFS Server"
+- variable: nfs.mountOptions
+  default: ""
+  description: "Config NFS mount options (e.g. 'nfsvers=3')"
+  type: string
+  label: NFS Mount Options
+  group: "NFS Server"
+- variable: storageClass.create
+  default: true
+  description: "Creating the StorageClass"
+  type: boolean
+  required: true
+  label: Creating the StorageClass
+  group: "StorageClass Setting"
+  show_subquestion_if: true
+  subquestions:
+  - variable: storageClass.name
+    default: "nfs-client"
+    description: "Set a StorageClass name"
+    type: string
+    label: StorageClass name
+    required: true
+  - variable: storageClass.defaultClass
+    default: true
+    description: "Set StorageClass as the default StorageClass"
+    type: boolean
+    label: Set StorageClass as the default StorageClass
+    required: true
+  - variable: storageClass.reclaimPolicy
+    default: "Delete"
+    description: "ReclaimPolicy of the Created StorageClass"
+    type: enum
+    label: ReclaimPolicy of the Created StorageClass
+    required: true
+    options:
+      - "Delete"
+      - "Retain"
+  - variable: storageClass.allowVolumeExpansion
+    default: true
+    description: "AllowVolumeExpansion shows whether the storage class allow volume expand"
+    type: boolean
+    label: AllowVolumeExpansion Shows Whether The StorageClass Allow Volume Expand
+    required: true
