@@ -12,7 +12,7 @@ questions:
   group: "Container Images"
   subquestions:
   - variable: images.server.repository
-    default: "docker.io/drone/drone"
+    default: "ranchercharts/drone-drone"
     description: "Drone Server image name"
     type: string
     label: Drone Server Image Name
@@ -22,7 +22,7 @@ questions:
     type: string
     label: Drone Server Image Tag
   - variable: images.agent.repository
-    default: "docker.io/drone/agent"
+    default: "ranchercharts/drone-agent"
     description: "Drone Agent image name"
     type: string
     label: Drone Agent Image Name
@@ -32,7 +32,7 @@ questions:
     type: string
     label: Drone Agent Image Tag
   - variable: images.dind.repository
-    default: "docker.io/library/docker"
+    default: "ranchercharts/library-docker"
     description: "Drone Dind image name"
     type: string
     label: Drone Dind Image Name
@@ -242,3 +242,23 @@ questions:
   type: boolean
   label: Enable Prometheus Metrics Endpoint
   group: "Metrics Setting"
+# database setting
+- variable: server.env.DRONE_DATABASE_DRIVER
+  default: "sqlite3"
+  description: "Drone requires the use of a database backend for persistence. Drone uses an embedded sqlite database by default"
+  type: enum
+  required: true
+  label: Select Drone Databse Driver
+  group: "Database Settings"
+  options:
+    - "sqlite3"
+    - "postgres"
+    - "mysql"
+- variable: server.env.DRONE_DATABASE_DATASOURCE
+  default: ""
+  description: "Specify Drone database datasource, e.g., postgres://root:password@1.2.3.4:5432/postgres?sslmode=disable"
+  type: enum
+  required: true
+  label: Drone Database Datasource
+  show_if: "server.env.DRONE_DATABASE_DRIVER!=sqlite3"
+  group: "Database Settings"

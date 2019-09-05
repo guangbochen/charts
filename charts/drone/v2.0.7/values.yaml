@@ -3,7 +3,8 @@ images:
   ## ref: https://hub.docker.com/r/drone/drone/tags/
   ##
   server:
-    repository: "docker.io/drone/drone"
+    # repository: "docker.io/drone/drone"
+    repository: "ranchercharts/drone-drone"
     tag: 1.2
     pullPolicy: IfNotPresent
 
@@ -11,7 +12,8 @@ images:
   ## ref: https://hub.docker.com/r/drone/agent/tags/
   ##
   agent:
-    repository: "docker.io/drone/agent"
+    # repository: "docker.io/drone/agent"
+    repository: "ranchercharts/drone-agent"
     tag: 1.2
     pullPolicy: IfNotPresent
 
@@ -19,7 +21,8 @@ images:
   ## ref: https://hub.docker.com/r/library/docker/tags/
   ##
   dind:
-    repository: "docker.io/library/docker"
+    # repository: "docker.io/library/docker"
+    repository: "ranchercharts/library-docker"
     tag: 18.06.1-ce-dind
     pullPolicy: IfNotPresent
 
