@@ -1,4 +1,4 @@
-# Default values for etcd-operator.
+Default values for etcd-operator.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 global:
@@ -115,7 +115,7 @@ restoreOperator:
   ## e.g., analytics: true
   commandArgs: {}
   securityContext: {}
-  tolerations: {}
+  tolerations: []
 
 ## etcd-cluster specific values
 etcdCluster:
@@ -151,4 +151,4 @@ etcdCluster:
     ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
     nodeSelector: {}
     securityContext: {}
-    tolerations: {}
+    tolerations: []

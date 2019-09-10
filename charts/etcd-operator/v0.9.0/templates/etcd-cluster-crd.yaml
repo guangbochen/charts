@@ -8,10 +8,10 @@ metadata:
     app: {{ template "etcd-operator.name" . }}
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
+  {{- if .Values.clusterwide.enabled }}
   annotations:
-    {{- if .Values.clusterwide.enabled }}
     "etcd.database.coreos.com/scope": "clusterwide"
-    {{- end }}
+  {{- end }}
 spec:
   size: {{ .Values.etcdCluster.size }}
   version: "{{ .Values.etcdCluster.version }}"
