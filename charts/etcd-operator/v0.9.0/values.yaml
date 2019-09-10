@@ -153,4 +153,4 @@ etcdCluster:
     ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
     nodeSelector: {}
     securityContext: {}
-    tolerations: {}
+    # tolerations: {}
