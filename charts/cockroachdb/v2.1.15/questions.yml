@@ -1,0 +1,68 @@
+categories:
+- database
+labels:
+  io.cattle.role: cluster # options are cluster/project
+questions:
+- variable: Replicas
+  default: "3"
+  description: "cockroachdb statefulset replicas."
+  type: int
+  required: true
+  min: 3
+  max: 99
+  label: CockroachDB replicas
+  group: "CockroachDB Settings"
+# persistent setting
+- variable: Storage
+  required: true
+  default: "100Gi"
+  description: "CockroachDB Persistent Volume Size."
+  type: string
+  label: CockroachDB Persistent Volume Size
+  group: "CockroachDB Settings"
+- variable: StorageClass
+  default: ""
+  required: true
+  description: "If undefined or null, uses the default StorageClass. Default to null."
+  type: storageclass
+  label: Default StorageClass for CockroachDB
+  group: "CockroachDB Settings"
+- variable: advancedSettings
+  default: false
+  label: Show Advanced Settings
+  type: boolean
+  show_subquestion_if: true
+  group: "Advanced Settings"
+  subquestions:
+  - variable: CacheSize
+    default: "25%"
+    description: "Size of CockroachDB's in-memory cache."
+    type: string
+    label: CockroachDB's In-Memory Cache Size
+  - variable: MaxSQLMemory
+    default: "25%"
+    description: "Max memory to use processing SQL queries."
+    type: string
+    label: Max Memory to Use Processing SQL Queries
+  - variable: Locality
+    default: ""
+    description: "Set a locality (e.g. \"region=us-central1,datacenter=us-centra1-a\") if you're doing multi-cluster so data is distributed properly."
+    type: string
+    label: Locality Attribute For This Deployment		
+- variable: Service.type
+  default: "ClusterIP"
+  description: "CockroachDB Service Type"
+  type: enum
+  group: "Services and Load Balancing"
+  options:
+    - "ClusterIP"
+    - "NodePort"
+  required: true
+  label: CockroachDB Service Type
+- variable: Secure.Enabled
+  default: false
+  description: "Whether to run securely using TLS certificates."
+  label: Enabled CockroachDB Secure Using TLS Certificates
+  type: boolean
+  show_subquestion_if: true
+  group: "CockroachDB Secure"
