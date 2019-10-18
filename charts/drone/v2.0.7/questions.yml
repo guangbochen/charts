@@ -43,7 +43,7 @@ questions:
     label: Drone Dind Image Tag
 - variable: server.kubernetes.enabled
   default: false
-  type: string
+  type: boolean
   description: "whether to use kubernetes to run pipelines (if false will run agents instead)."
   label: Whether to Use Kubernetes Runtime
   required: true

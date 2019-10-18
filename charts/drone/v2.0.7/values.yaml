@@ -5,7 +5,7 @@ images:
   server:
     # repository: "docker.io/drone/drone"
     repository: "ranchercharts/drone-drone"
-    tag: 1.2
+    tag: 1.6.0
     pullPolicy: IfNotPresent
 
   ## The official drone (agent) image, change tag to use a different version.
@@ -14,7 +14,7 @@ images:
   agent:
     # repository: "docker.io/drone/agent"
     repository: "ranchercharts/drone-agent"
-    tag: 1.2
+    tag: 1.6.0
     pullPolicy: IfNotPresent
 
   ## The official docker (dind) image, change tag to use a different version.
