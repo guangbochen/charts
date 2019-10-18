@@ -17,7 +17,7 @@ questions:
     type: string
     label: Drone Server Image Name
   - variable: images.server.tag
-    default: "1.2"
+    default: "1.6.0"
     description: "Drone Server image tag"
     type: string
     label: Drone Server Image Tag
@@ -27,7 +27,7 @@ questions:
     type: string
     label: Drone Agent Image Name
   - variable: images.agent.tag
-    default: "1.2"
+    default: "1.6.0"
     description: "Drone Agent image tag"
     type: string
     label: Drone Agent Image Tag
@@ -41,6 +41,13 @@ questions:
     description: "Drone Dind image tag"
     type: string
     label: Drone Dind Image Tag
+- variable: server.kubernetes.enabled
+  default: false
+  type: string
+  description: "whether to use kubernetes to run pipelines (if false will run agents instead)."
+  label: Whether to Use Kubernetes Runtime
+  required: true
+  group: "Drone Settings"
 - variable: server.host
   default: ""
   type: string
